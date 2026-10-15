@@ -1,0 +1,3 @@
+# Demo de rediseño: no indexar hasta su aprobación y publicación en el dominio definitivo.
+User-agent: *
+Disallow: /

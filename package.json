@@ -1,0 +1,11 @@
+{
+  "name": "creixensa-demo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Demo de rediseño para Creixensa Pilates & Fitness Studio (Zaragoza). Sitio estático sin dependencias.",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/serve.mjs 4321",
+    "check": "node scripts/check.mjs && node --check assets/js/main.js"
+  }
+}
