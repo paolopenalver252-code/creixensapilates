@@ -154,26 +154,53 @@
     });
   }
 
-  /* ---------- Barra de contacto en móvil ---------- */
-  var mobileCta = document.querySelector('[data-mobile-cta]');
+  /* ---------- Transición hero → «El estudio» ---------- */
+  // El hero queda fijo (sticky) cuando su parte inferior llega al final de la pantalla, así que
+  // también se ve entero si es más alto que la ventana. --hero-cover va de 0 a 1 según
+  // «El estudio» lo va tapando; el CSS lo usa para atenuar el hero.
   var hero = document.querySelector('.hero');
+  var values = document.getElementById('estudio');
+  var heroCover = 0;
+  var onHeroCover = function () {};
+  var stageTicking = false;
+
+  function updateStage() {
+    stageTicking = false;
+    var headerH = header.offsetHeight;
+    var viewH = window.innerHeight;
+    hero.style.setProperty('--hero-stick', Math.min(headerH, viewH - hero.offsetHeight) + 'px');
+    var top = values.getBoundingClientRect().top;
+    heroCover = Math.min(1, Math.max(0, (viewH - top) / (viewH - headerH)));
+    hero.style.setProperty('--hero-cover', heroCover.toFixed(3));
+    onHeroCover();
+  }
+  function requestStage() {
+    if (!stageTicking) {
+      stageTicking = true;
+      window.requestAnimationFrame(updateStage);
+    }
+  }
+  window.addEventListener('scroll', requestStage, { passive: true });
+  window.addEventListener('resize', requestStage);
+  updateStage();
+
+  /* ---------- Barra de contacto en móvil ---------- */
+  // Aparece cuando el hero ya está casi tapado y se oculta al llegar a Contacto.
+  var mobileCta = document.querySelector('[data-mobile-cta]');
   var contact = document.getElementById('contacto');
   if (mobileCta && 'IntersectionObserver' in window) {
-    var heroVisible = true;
     var contactVisible = false;
     var update = function () {
-      var show = !heroVisible && !contactVisible;
+      var show = heroCover > 0.6 && !contactVisible;
       mobileCta.classList.toggle('is-visible', show);
       mobileCta.inert = !show;
     };
-    new IntersectionObserver(function (entries) {
-      heroVisible = entries[0].isIntersecting;
-      update();
-    }).observe(hero);
+    onHeroCover = update;
     new IntersectionObserver(function (entries) {
       contactVisible = entries[0].isIntersecting;
       update();
     }).observe(contact);
+    update();
   }
 
   /* ---------- Aparición suave de bloques ---------- */

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Creixensa Pilates & Fitness Studio · demo de rediseño
+   Creixensa Pilates & Fitness Studio
    ========================================================================== */
 
 @font-face {
@@ -185,17 +185,6 @@ a:hover { text-decoration-color: var(--gold); }
 }
 .link-arrow:hover::after { width: 28px; }
 
-/* ---------- Demo bar ---------- */
-.demo-bar {
-  background: var(--charcoal);
-  color: rgba(247, 245, 240, 0.86);
-  font-size: 0.8125rem;
-  line-height: 1.4;
-  text-align: center;
-  padding: 8px var(--gutter);
-}
-.demo-bar strong { color: var(--gold-light); font-weight: 600; }
-
 /* ---------- Header ---------- */
 .site-header {
   position: sticky;
@@ -224,29 +213,8 @@ a:hover { text-decoration-color: var(--gold); }
   text-decoration: none;
   color: var(--forest-deep);
 }
-.brand-mark {
-  width: 38px; height: 38px;
-  flex: none;
-  fill: none;
-  stroke: var(--gold);
-  stroke-width: 1.15;
-}
-.brand-text { display: flex; flex-direction: column; line-height: 1; }
-.brand-name {
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  line-height: 0.9;
-}
-.brand-tag {
-  margin-top: 5px;
-  font-size: 0.625rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
+.brand-mark { width: 44px; height: 44px; flex: none; }
+.brand-word { width: auto; height: 26px; flex: none; }
 
 .site-nav ul { display: flex; gap: clamp(18px, 2.4vw, 34px); }
 .site-nav a:not(.btn) {
@@ -294,12 +262,9 @@ a:hover { text-decoration-color: var(--gold); }
     position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
   }
   .menu-toggle { padding-left: 10px; min-width: 44px; justify-content: center; }
-  .brand-tag { letter-spacing: 0.1em; white-space: nowrap; }
-  .brand-mark { width: 34px; height: 34px; }
+  .brand-mark { width: 38px; height: 38px; }
+  .brand-word { height: 22px; }
   .brand { gap: 10px; }
-}
-@media (max-width: 479px) {
-  .demo-bar-extra { display: none; }
 }
 
 @media (max-width: 899px) {
@@ -328,25 +293,48 @@ a:hover { text-decoration-color: var(--gold); }
 }
 
 /* ---------- Hero ---------- */
+/* Foto de la clienta a sangre completa, algo desaturada y con un velo gris oscuro
+   uniforme (acabado cinematográfico) más un refuerzo en la zona del texto. */
 .hero {
   position: relative;
-  padding-block: clamp(40px, 6vw, 88px) clamp(72px, 9vw, 128px);
-  overflow: hidden;
-}
-.hero-grid {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: clamp(32px, 6vw, 96px);
+  isolation: isolate;
+  display: flex;
   align-items: center;
+  min-height: clamp(560px, calc(100svh - var(--header-h)), 900px);
+  padding-block: clamp(64px, 8vw, 120px);
+  overflow: hidden;
+  background: #161717;
+  color: var(--ivory);
 }
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+  filter: saturate(.62) contrast(1.04);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(14, 15, 15, .62) 0%, rgba(14, 15, 15, .42) 40%, rgba(14, 15, 15, .08) 72%, rgba(14, 15, 15, 0) 100%),
+    linear-gradient(0deg, rgba(14, 15, 15, .4) 0%, rgba(14, 15, 15, 0) 30%),
+    rgba(24, 25, 25, .38);
+}
+.hero :focus-visible { outline-color: var(--gold-light); }
+
+.hero-copy { max-width: 640px; }
 .hero h1 {
   font-size: clamp(2.75rem, 5.2vw + 0.8rem, 5.6rem);
   line-height: 0.98;
-  color: var(--forest-deep);
+  color: var(--ivory);
 }
-.hero h1 em { font-style: italic; color: var(--forest); }
+.hero h1 em { font-style: italic; color: var(--gold-light); }
 .hero h1 .eyebrow {
   display: block;
   margin-bottom: 24px;
@@ -356,81 +344,102 @@ a:hover { text-decoration-color: var(--gold); }
   letter-spacing: 0.14em;
   line-height: 1.4;
   text-transform: uppercase;
-  color: var(--gold-text);
+  color: var(--gold-light);
 }
 .hero-lead {
   max-width: 34rem;
   margin-top: 28px;
   font-size: clamp(1.0625rem, 0.4vw + 1rem, 1.25rem);
-  color: var(--muted);
+  color: rgba(247, 245, 240, .88);
 }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
-.hero-note { margin-top: 24px; font-size: 0.9375rem; color: var(--muted); }
-.hero-note a { color: var(--forest); font-weight: 600; }
+.hero .btn-primary { background: var(--ivory); color: var(--forest-deep); }
+.hero .btn-primary:hover { background: #fff; }
+.hero .btn-ghost { border-color: rgba(247, 245, 240, .6); color: var(--ivory); }
+.hero .btn-ghost:hover { border-color: var(--ivory); background: rgba(247, 245, 240, .1); }
+.hero-note { margin-top: 24px; font-size: 0.9375rem; color: rgba(247, 245, 240, .8); }
+.hero-note a { color: var(--ivory); font-weight: 600; text-decoration-color: var(--gold-light); }
 
-.hero-media { position: relative; margin: 0; justify-self: end; width: 100%; max-width: 440px; }
-.hero-photo {
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  border-radius: 999px 999px var(--radius) var(--radius);
-  background: var(--sand);
-}
-.hero-photo img { width: 100%; height: 100%; object-fit: cover; }
-.hero-media figcaption {
-  margin-top: 14px;
-  font-size: 0.8125rem;
-  color: var(--muted);
-  text-align: right;
-}
 .rating-chip {
-  position: absolute;
-  left: -28px; bottom: 56px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 20px 14px 18px;
-  background: var(--paper);
-  border: 1px solid var(--line);
+  margin-top: 32px;
+  padding: 12px 18px 12px 16px;
+  background: rgba(14, 15, 15, .45);
+  border: 1px solid rgba(247, 245, 240, .28);
   border-radius: var(--radius);
-  box-shadow: 0 18px 40px -24px rgba(36, 40, 36, .45);
+  color: var(--ivory);
   text-decoration: none;
-  transition: transform .3s var(--ease);
+  transition: border-color .3s var(--ease), background-color .3s var(--ease);
 }
-.rating-chip:hover { transform: translateY(-2px); }
+.rating-chip:hover { border-color: var(--gold-light); background: rgba(14, 15, 15, .62); }
 .rating-num {
   font-family: var(--font-display);
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   line-height: 1;
-  color: var(--forest-deep);
 }
 .rating-text { font-size: 0.8125rem; font-weight: 600; line-height: 1.3; }
-.rating-text span { font-weight: 400; color: var(--muted); }
+.rating-text span { font-weight: 400; color: rgba(247, 245, 240, .75); }
 
-.hero-line {
+.hero-caption {
   position: absolute;
-  left: 0; right: 0; bottom: 18px;
-  width: 100%; height: 120px;
-  fill: none;
-  stroke: var(--gold);
-  stroke-width: 1;
-  opacity: .55;
-  pointer-events: none;
+  right: var(--gutter);
+  bottom: 20px;
+  font-size: 0.8125rem;
+  color: rgba(247, 245, 240, .75);
 }
 
+/* Transición hero → «El estudio»: el hero queda fijo y la sección siguiente sube por encima
+   como una hoja. --hero-stick y --hero-cover (0 → 1) los calcula main.js al hacer scroll. */
+.hero-stage { position: relative; }
+.values {
+  position: relative;
+  z-index: 1;
+  background: var(--ivory);
+  border-radius: 28px 28px 0 0;
+  box-shadow: 0 -28px 56px -32px rgba(0, 0, 0, .55);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero { position: sticky; top: var(--hero-stick, 0px); }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: #0e0f0f;
+    opacity: calc(var(--hero-cover, 0) * .55);
+    pointer-events: none;
+  }
+  .hero-copy {
+    opacity: calc(1 - var(--hero-cover, 0) * .7);
+    transform: translateY(calc(var(--hero-cover, 0) * -48px));
+  }
+}
+
+/* Móvil y tablet: la foto respira arriba y el texto se apoya abajo sobre un degradado vertical. */
 @media (max-width: 819px) {
-  .hero-grid { grid-template-columns: 1fr; }
-  .hero-media { justify-self: center; max-width: 380px; margin-top: 8px; }
-  .rating-chip { left: -12px; }
-  .hero-line { height: 70px; bottom: 8px; }
+  .hero {
+    align-items: flex-end;
+    min-height: calc(100svh - var(--header-h));
+    padding-top: clamp(200px, 36svh, 360px);
+    padding-bottom: 40px;
+  }
+  /* En vertical la foto se amplía y se sube para quitar techo: las alumnas y el ventanal quedan arriba. */
+  .hero-bg { top: -58%; height: 158%; object-position: 46% 50%; }
+  .hero::before {
+    background:
+      linear-gradient(180deg, rgba(14, 15, 15, 0) 0%, rgba(14, 15, 15, .1) 22%, rgba(14, 15, 15, .62) 44%, rgba(14, 15, 15, .78) 100%),
+      rgba(24, 25, 25, .32);
+  }
+  .hero-caption { position: static; margin-top: 28px; }
 }
 @media (max-width: 420px) {
   .hero-actions .btn { width: 100%; }
-  .rating-chip { left: 8px; bottom: 48px; padding: 10px 14px; }
   .rating-num { font-size: 2rem; }
 }
 
 /* ---------- Values ---------- */
-.values { border-top: 1px solid var(--line); }
 .values-grid {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -481,7 +490,10 @@ a:hover { text-decoration-color: var(--gold); }
   gap: clamp(32px, 6vw, 88px);
   align-items: center;
 }
+.feature + .feature { margin-top: clamp(72px, 9vw, 128px); }
+.feature-reverse .feature-media { order: 2; }
 .feature-media { margin: 0; }
+.feature-reverse .feature-media img { object-position: 50% 32%; }
 .feature-media img {
   width: 100%;
   aspect-ratio: 1;
@@ -542,6 +554,7 @@ a:hover { text-decoration-color: var(--gold); }
 @media (max-width: 819px) {
   .feature, .services-split { grid-template-columns: 1fr; }
   .feature-media img { aspect-ratio: 4 / 3; }
+  .feature-reverse .feature-media { order: 0; }
 }
 @media (max-width: 479px) {
   .class-list > div { grid-template-columns: 1fr; }
@@ -726,7 +739,10 @@ a:hover { text-decoration-color: var(--gold); }
 .reviews-meta { font-weight: 600; line-height: 1.35; }
 .reviews-source { margin-top: 18px; font-size: 0.875rem; color: var(--muted); max-width: 22rem; }
 
-.reviews-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 48px; }
+.reviews-summary { position: sticky; top: calc(var(--header-h) + 40px); align-self: start; }
+/* Reseñas de distinta longitud: columnas tipo mosaico para evitar huecos. */
+.reviews-columns { columns: 2; column-gap: 48px; }
+.reviews-columns .review { break-inside: avoid; margin-bottom: 40px; }
 .review { margin: 0; padding-top: 24px; border-top: 1px solid var(--line); }
 .review blockquote { margin: 0; }
 .review p {
@@ -735,15 +751,15 @@ a:hover { text-decoration-color: var(--gold); }
   line-height: 1.3;
   color: var(--charcoal);
 }
-.review-main { grid-column: 1 / -1; border-top: 2px solid var(--gold); }
-.review-main p { font-size: clamp(1.75rem, 1.6vw + 1.2rem, 2.4rem); line-height: 1.22; font-style: italic; color: var(--forest-deep); }
 .review figcaption { margin-top: 16px; font-size: 0.875rem; font-weight: 600; color: var(--muted); }
 
 @media (max-width: 899px) {
   .reviews-grid { grid-template-columns: 1fr; }
+  .reviews-summary { position: static; }
 }
 @media (max-width: 599px) {
-  .reviews-list { grid-template-columns: 1fr; }
+  .reviews-columns { columns: 1; }
+  .reviews-columns .review p { font-size: 1.375rem; }
 }
 
 /* ---------- Contact ---------- */
@@ -901,8 +917,8 @@ a:hover { text-decoration-color: var(--gold); }
   grid-template-columns: 1.4fr repeat(3, 1fr);
   gap: 40px;
 }
-.footer-brand .brand-name { color: var(--ivory); font-size: 2.4rem; }
-.footer-brand p:not(.brand-name) { margin-top: 12px; max-width: 18rem; }
+.footer-logo { width: 220px; height: auto; margin-left: -6px; }
+.footer-brand p { margin-top: 14px; max-width: 18rem; }
 .footer-title {
   margin-bottom: 14px;
   font-family: var(--font-body);

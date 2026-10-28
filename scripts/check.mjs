@@ -43,7 +43,9 @@ for (const page of pages) {
 
   // Imágenes con alt y dimensiones
   for (const [tag] of html.matchAll(/<img\b[^>]*>/g)) {
-    if (!/\salt="[^"]+"/.test(tag)) fail(page, `imagen sin alt: ${tag.slice(0, 80)}`);
+    // alt vacío solo para las piezas del logo dentro del enlace de marca, que ya lleva aria-label
+    const decorative = /class="brand-(mark|word)"/.test(tag) && /\salt=""/.test(tag);
+    if (!decorative && !/\salt="[^"]+"/.test(tag)) fail(page, `imagen sin alt: ${tag.slice(0, 80)}`);
     if (!/\swidth="\d+"/.test(tag) || !/\sheight="\d+"/.test(tag)) fail(page, `imagen sin width/height: ${tag.slice(0, 80)}`);
   }
 

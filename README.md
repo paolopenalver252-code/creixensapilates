@@ -33,8 +33,9 @@ Requiere Node 18 o superior. No hay que instalar nada.
 
 ## Pendiente de validar con el negocio
 
-- Logotipo oficial en vectorial. La marca de la demo es una aproximación geométrica provisional.
+- Logotipo oficial en vectorial (SVG/PDF). Ahora se usa el logo real recortado de una imagen JPG de 1050 px facilitada por el cliente (`assets/img/logo-*.png`), que se ve algo suave en pantallas de alta densidad.
 - Fotografías originales en alta resolución y autorización para usarlas. Las actuales son de su Instagram, a 640 px.
+- Bloque «Quiromasaje y osteopatía deportiva»: usa una foto de la clienta de un ejercicio de Pilates en la sala (`sesion-estudio.jpg`). Si más adelante hay una foto de una sesión de masaje u osteopatía, encajaría mejor.
 - Si la clase de prueba sigue vigente y cómo continuar después (bonos, precios). No se publican precios.
 - Duración y formato de cada clase de fitness (Body Studio, Body Tono, Aerofit…).
 - Alcance de las sesiones de osteopatía deportiva y quiromasaje, y quién las imparte.
