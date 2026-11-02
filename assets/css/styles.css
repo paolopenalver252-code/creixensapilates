@@ -547,6 +547,11 @@ a:hover { text-decoration-color: var(--gold); }
   font-weight: 500;
   color: var(--forest-deep);
 }
+.fitness-details { margin-top: 22px; }
+.fitness-details > div { padding-block: 14px; border-top: 1px solid var(--line); }
+.fitness-details > div:last-child { border-bottom: 1px solid var(--line); }
+.fitness-details dt { font-weight: 600; color: var(--forest-deep); }
+.fitness-details dd { margin-top: 4px; color: var(--muted); }
 .plain-list { margin-top: 18px; }
 .plain-list li { padding-block: 12px; border-bottom: 1px solid var(--line); color: var(--muted); }
 .plain-list li:first-child { border-top: 1px solid var(--line); }
@@ -987,10 +992,24 @@ a:hover { text-decoration-color: var(--gold); }
 .legal p, .legal ul { margin-top: 14px; color: var(--muted); }
 .legal ul { list-style: disc; padding-left: 1.25rem; }
 .legal li + li { margin-top: 6px; }
-.pending {
-  margin-top: 28px;
-  padding: 18px 20px;
-  border-left: 3px solid var(--gold);
-  background: var(--sand-soft);
-  color: var(--charcoal) !important;
+.legal h2 { padding-top: 32px; border-top: 1px solid var(--line); }
+.legal h3 { margin-top: 28px; font-size: 1.0625rem; color: var(--charcoal); }
+.legal a { color: var(--forest); }
+.legal-updated { font-size: 0.875rem; }
+.legal-toc ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 24px; }
+.legal-toc li + li { margin-top: 0; }
+.legal-toc a { font-weight: 600; }
+.legal-data { margin-top: 18px; }
+.legal-data > div {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 2px 20px;
+  padding-block: 12px;
+  border-top: 1px solid var(--line);
+}
+.legal-data > div:last-child { border-bottom: 1px solid var(--line); }
+.legal-data dt { font-weight: 600; color: var(--charcoal); }
+.legal-data dd { color: var(--muted); }
+@media (max-width: 479px) {
+  .legal-data > div { grid-template-columns: 1fr; }
 }
