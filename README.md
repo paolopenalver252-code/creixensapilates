@@ -40,6 +40,7 @@ Requiere Node 18 o superior. No hay que instalar nada.
 
 ## Pendiente de validar con el negocio
 
+- Foto del hero (`sala-pilates-clara-creixensa-zaragoza.jpg`): parece retocada o generada con IA; la clienta debe confirmar que representa bien la sala.
 - Logotipo oficial en vectorial (SVG/PDF). Ahora se usa el logo real recortado de una imagen JPG de 1050 px facilitada por el cliente (`assets/img/logo-*.png`), que se ve algo suave en pantallas de alta densidad.
 - Fotografías originales en alta resolución y autorización para usarlas. Las actuales son de su Instagram, a 640 px.
 - Bloque «Masajes y terapias manuales» (quiromasaje, osteopatía deportiva, shiatsu y kobido): usa una foto de la clienta de un ejercicio de Pilates en la sala (`ejercicio-pilates-colchoneta-creixensa.jpg`). Si más adelante hay una foto de una sesión de masaje u osteopatía, encajaría mejor.
