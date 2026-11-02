@@ -82,6 +82,49 @@ const wa = new Set([...index.matchAll(/wa\.me\/(\d+)/g)].map((m) => m[1]));
 if (phones.size !== 1 || [...phones][0] !== '34611550183') fail('index.html', `teléfonos incoherentes: ${[...phones]}`);
 if (wa.size !== 1 || [...wa][0] !== '34611550183') fail('index.html', `números de WhatsApp incoherentes: ${[...wa]}`);
 
+// SEO: metadatos, canonical, sitemap y robots coherentes con una única dirección pública
+const canonical = (index.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
+if (!canonical || !/^https:\/\/[^/]+\/$/.test(canonical)) fail('index.html', `canonical ausente o no válido: ${canonical}`);
+const base = (canonical || '').replace(/\/$/, '');
+
+const title = (index.match(/<title>([^<]+)<\/title>/) || [])[1] || '';
+if (title.length > 60) fail('index.html', `title de ${title.length} caracteres (máx. 60)`);
+const description = (index.match(/<meta name="description" content="([^"]+)"/) || [])[1] || '';
+if (description.length > 160) fail('index.html', `meta description de ${description.length} caracteres (máx. 160)`);
+if (/<meta name="robots"[^>]*noindex/.test(index)) fail('index.html', 'noindex en la página principal');
+
+const localFromUrl = (url) => join(root, url.slice(base.length + 1));
+const absolute = [
+  ...[...index.matchAll(/<meta (?:property|name)="(?:og:image|og:url|twitter:image)" content="([^"]+)"/g)].map((m) => m[1]),
+  ...[...index.matchAll(/"(https:\/\/[^"]+\.(?:jpg|png))"/g)].map((m) => m[1]),
+];
+for (const url of absolute) {
+  if (!url.startsWith(base)) fail('index.html', `URL fuera de la dirección canónica: ${url}`);
+  else if (/\.(jpg|png)$/.test(url) && !(await exists(localFromUrl(url)))) fail('index.html', `imagen inexistente: ${url}`);
+}
+
+const robots = await readFile(join(root, 'robots.txt'), 'utf8');
+if (/^Disallow:\s*\/\s*$/m.test(robots)) fail('robots.txt', 'bloquea todo el sitio');
+if (!robots.includes(`Sitemap: ${base}/sitemap.xml`)) fail('robots.txt', 'no enlaza el sitemap correcto');
+
+const sitemap = await readFile(join(root, 'sitemap.xml'), 'utf8');
+for (const [, url] of sitemap.matchAll(/<(?:loc|image:loc)>([^<]+)</g)) {
+  if (!url.startsWith(base)) fail('sitemap.xml', `URL fuera de la dirección canónica: ${url}`);
+  else if (/\.(jpg|png)$/.test(url) && !(await exists(localFromUrl(url)))) fail('sitemap.xml', `imagen inexistente: ${url}`);
+}
+if (!sitemap.includes(`<loc>${base}/</loc>`)) fail('sitemap.xml', 'falta la página principal');
+
+// La página legal queda fuera de buscadores a propósito y, por tanto, fuera del sitemap
+const legal = await readFile(join(root, 'legal.html'), 'utf8');
+if (!/<meta name="robots" content="noindex/.test(legal)) fail('legal.html', 'debería llevar noindex');
+if (sitemap.includes('legal.html')) fail('sitemap.xml', 'no debe incluir una página con noindex');
+
+// Datos estructurados: sin reseñas ni valoraciones, y NAP igual que en la web
+const ld = JSON.parse((index.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/) || [])[1] || '{}');
+const ldText = JSON.stringify(ld);
+if (/"review"|aggregateRating|priceRange|"price"/.test(ldText)) fail('index.html', 'JSON-LD con reseñas o precios');
+if (!ldText.includes('+34611550183') || !ldText.includes('50005')) fail('index.html', 'JSON-LD sin teléfono o código postal correctos');
+
 if (errors.length) {
   console.error(`✗ ${errors.length} problema(s):\n` + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);

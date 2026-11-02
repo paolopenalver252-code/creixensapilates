@@ -42,9 +42,9 @@ Requiere Node 18 o superior. No hay que instalar nada.
 
 - Logotipo oficial en vectorial (SVG/PDF). Ahora se usa el logo real recortado de una imagen JPG de 1050 px facilitada por el cliente (`assets/img/logo-*.png`), que se ve algo suave en pantallas de alta densidad.
 - Fotografías originales en alta resolución y autorización para usarlas. Las actuales son de su Instagram, a 640 px.
-- Bloque «Masajes y terapias manuales» (quiromasaje, osteopatía deportiva, shiatsu y kobido): usa una foto de la clienta de un ejercicio de Pilates en la sala (`sesion-estudio.jpg`). Si más adelante hay una foto de una sesión de masaje u osteopatía, encajaría mejor.
+- Bloque «Masajes y terapias manuales» (quiromasaje, osteopatía deportiva, shiatsu y kobido): usa una foto de la clienta de un ejercicio de Pilates en la sala (`ejercicio-pilates-colchoneta-creixensa.jpg`). Si más adelante hay una foto de una sesión de masaje u osteopatía, encajaría mejor.
 - Cómo continuar después de la clase de prueba gratuita (bonos, precios de las clases).
 - Duración y formato de las demás clases de fitness (Body Studio, Body Tono, Tabata, Ritmos Latinos). La descripción de Aerofit la ha facilitado la clienta.
 - Alcance y duración de las sesiones de quiromasaje, osteopatía deportiva, shiatsu y kobido, y quién las imparte.
-- Dominio definitivo. Después hay que añadir `canonical`, URLs absolutas de Open Graph, `url` en el JSON-LD y quitar `noindex`.
+- Dominio definitivo. Ahora `canonical`, Open Graph, JSON-LD, `sitemap.xml` y `robots.txt` apuntan de forma provisional a `https://creixensapilates.vercel.app`: al conectar el dominio hay que sustituir esa dirección en `index.html`, `legal.html`, `sitemap.xml` y `robots.txt`, y redirigir las direcciones `vercel.app` al dominio.
 - El horario de Google Maps no coincide con el de clases (por ejemplo, el miércoles por la tarde).
