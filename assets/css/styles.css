@@ -500,12 +500,10 @@ a:hover { text-decoration-color: var(--gold); }
 .feature + .feature { margin-top: clamp(72px, 9vw, 128px); }
 .feature-reverse .feature-media { order: 2; }
 .feature-media { margin: 0; }
-.feature-reverse .feature-media img { object-position: 50% 32%; }
 .feature-media img {
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
-  border-radius: var(--radius);
 }
 .feature-title {
   font-family: var(--font-display);
@@ -558,6 +556,8 @@ a:hover { text-decoration-color: var(--gold); }
 .fitness-details > div:last-child { border-bottom: 1px solid var(--line); }
 .fitness-details dt { font-weight: 600; color: var(--forest-deep); }
 .fitness-details dd { margin-top: 4px; color: var(--muted); }
+.service-media { margin: 28px 0 0; }
+.service-media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 42%; }
 .plain-list { margin-top: 18px; }
 .plain-list li { padding-block: 12px; border-bottom: 1px solid var(--line); color: var(--muted); }
 .plain-list li:first-child { border-top: 1px solid var(--line); }
