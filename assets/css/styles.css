@@ -458,20 +458,10 @@ a:hover { text-decoration-color: var(--gold); }
 .values-intro p:not(.kicker) { margin-top: 22px; color: var(--muted); font-size: 1.125rem; max-width: 30rem; }
 
 .values-list li {
-  display: grid;
-  grid-template-columns: 72px 1fr;
-  gap: 8px;
   padding-block: 32px;
   border-top: 1px solid var(--line);
 }
 .values-list li:last-child { border-bottom: 1px solid var(--line); }
-.values-num {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.75rem;
-  line-height: 1.1;
-  color: var(--gold-text);
-}
 .values-list h3 {
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 1vw + 1.2rem, 2rem);
@@ -479,12 +469,11 @@ a:hover { text-decoration-color: var(--gold); }
   line-height: 1.1;
   color: var(--forest-deep);
 }
-.values-list p { margin-top: 10px; color: var(--muted); max-width: 34rem; }
+.values-list p { margin-top: 14px; color: var(--muted); max-width: 34rem; }
 
 @media (max-width: 819px) {
   .values-grid { grid-template-columns: 1fr; }
   .values-intro { position: static; }
-  .values-list li { grid-template-columns: 52px 1fr; }
 }
 
 /* ---------- Classes ---------- */
@@ -541,16 +530,8 @@ a:hover { text-decoration-color: var(--gold); }
   color: var(--forest-deep);
 }
 .service-block > p { margin-top: 14px; color: var(--muted); }
+@media (min-width: 820px) { .service-block-tall { grid-row: span 2; } }
 
-.tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
-.tag-list li {
-  padding: 7px 14px;
-  border: 1px solid rgba(54, 72, 63, .3);
-  border-radius: 999px;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--forest-deep);
-}
 .fitness-details { margin-top: 22px; }
 .fitness-details > div { padding-block: 14px; border-top: 1px solid var(--line); }
 .fitness-details > div:last-child { border-bottom: 1px solid var(--line); }
@@ -708,23 +689,12 @@ a:hover { text-decoration-color: var(--gold); }
 .approach h2 { color: var(--ivory); }
 .approach-lead { margin-top: 22px; font-size: 1.1875rem; color: rgba(247, 245, 240, .82); max-width: 36rem; }
 
-.steps { counter-reset: step; margin: 36px 0 40px; }
+.steps { margin: 36px 0 40px; }
 .steps li {
-  counter-increment: step;
-  position: relative;
-  padding: 20px 0 20px 64px;
+  padding: 20px 0;
   border-top: 1px solid var(--line-light);
 }
 .steps li:last-child { border-bottom: 1px solid var(--line-light); }
-.steps li::before {
-  content: counter(step, decimal-leading-zero);
-  position: absolute;
-  left: 0; top: 18px;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.6rem;
-  color: var(--gold-light);
-}
 .steps h3 { font-size: 1.125rem; color: var(--ivory); }
 .steps p { margin-top: 6px; color: rgba(247, 245, 240, .75); }
 

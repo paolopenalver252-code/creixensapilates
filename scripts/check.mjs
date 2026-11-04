@@ -125,6 +125,11 @@ const ldText = JSON.stringify(ld);
 if (/"review"|aggregateRating|priceRange|"price"/.test(ldText)) fail('index.html', 'JSON-LD con reseñas o precios');
 if (!ldText.includes('+34611550183') || !ldText.includes('50005')) fail('index.html', 'JSON-LD sin teléfono o código postal correctos');
 
+// Encargo de la clienta: sin referencias al barrio
+for (const [name, text] of [['index.html', index], ['legal.html', legal], ['sitemap.xml', sitemap]]) {
+  if (/delicias/i.test(text)) fail(name, 'menciona el barrio');
+}
+
 if (errors.length) {
   console.error(`✗ ${errors.length} problema(s):\n` + errors.map((e) => `  - ${e}`).join('\n'));
   process.exit(1);
